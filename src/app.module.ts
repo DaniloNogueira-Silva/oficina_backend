@@ -6,6 +6,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 import { ConfigModule } from '@nestjs/config';
 import { ServicesModule } from './services/services.module';
 import { UsersModule } from './users/users.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { UsersModule } from './users/users.module';
     BudgetsModule,
     VehiclesModule,
     ServicesModule,
-    UsersModule
+    UsersModule,
+    ProductsModule
   ],
   controllers: [],
   providers: [],

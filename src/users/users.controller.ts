@@ -26,7 +26,7 @@ export class UsersController
     }
 
     @Post()
-    async create ( @Body() userData: any ): Promise<User>
+    async create ( @Body() userData: Prisma.UserCreateInput ): Promise<User>
     {
         const user = await this.userService.create( userData );
         return user;
@@ -48,5 +48,13 @@ export class UsersController
 
         const user = await this.userService.delete( id );
         return user;
+    }
+
+    @Post('/login')
+    async login ( @Body() userData: any ): Promise<User>
+    {
+        const user = await this.userService.login( userData );
+        return user;
+
     }
 }

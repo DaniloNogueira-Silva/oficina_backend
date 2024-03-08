@@ -40,6 +40,10 @@ let UsersController = class UsersController {
         const user = await this.userService.delete(id);
         return user;
     }
+    async login(userData) {
+        const user = await this.userService.login(userData);
+        return user;
+    }
 };
 exports.UsersController = UsersController;
 __decorate([
@@ -77,6 +81,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Post)('/login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UserService])

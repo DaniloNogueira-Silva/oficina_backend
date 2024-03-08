@@ -9,7 +9,7 @@ export class UserRepository
 {
     constructor ( private prisma: PrismaService ) { }
 
-    async findById ( email: string ): Promise<User | null>
+    async findByEmail ( email: string ): Promise<User | null>
     {
         const findOne = await this.prisma.user.findFirst( {
             where: {
@@ -26,8 +26,8 @@ export class UserRepository
     };
 
     async create ( data: any ): Promise<User>
-    {   
-        
+    {
+
         return await this.prisma.user.create( {
             data: {
                 name: data.name,

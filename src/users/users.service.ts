@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { User, Prisma } from '@prisma/client';
 import { UserRepository } from './users.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService
@@ -13,7 +13,7 @@ export class UserService
     {
         try
         {
-            const user = await this.userRepository.findById( email );
+            const user = await this.userRepository.findByEmail( email );
             if ( !user )
             {
                 throw new NotFoundException( `User with email ${ email } not found.` );
@@ -40,7 +40,15 @@ export class UserService
     {
         try
         {
-            return await this.userRepository.create( data );
+            const saltOrRounds = 10;
+            const password = data.password;
+            const hash = await bcrypt.hash( password, saltOrRounds );
+            const param = {
+                name: data.name,
+                email: data.email,
+                password: hash
+            }
+            return await this.userRepository.create( param );
         } catch ( error )
         {
             throw new BadRequestException( `Failed to create user: ${ error.message }` );
@@ -76,6 +84,30 @@ export class UserService
         } catch ( error )
         {
             throw new BadRequestException( `Failed to delete user: ${ error.message }` );
+        }
+    }
+
+    async login ( data: any ): Promise<User>
+    {
+        try
+        {
+            const user = await this.userRepository.findByEmail( data.email );
+
+            if ( !user )
+            {
+                throw new NotFoundException( `User with email ${ data.email } not found.` );
+            }
+            const isMatch = await bcrypt.compare( data.password, user.password );
+
+            if ( !isMatch )
+            {
+                throw new NotFoundException( `The password was incorrect.` );
+            }
+
+            return user;
+        } catch ( error )
+        {
+            throw new BadRequestException( `Failed to login: ${ error.message }` );
         }
     }
 }

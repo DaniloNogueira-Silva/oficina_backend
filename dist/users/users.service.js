@@ -12,13 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const users_repository_1 = require("./users.repository");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
     async findById(email) {
         try {
-            const user = await this.userRepository.findById(email);
+            const user = await this.userRepository.findByEmail(email);
             if (!user) {
                 throw new common_1.NotFoundException(`User with email ${email} not found.`);
             }
@@ -38,7 +39,15 @@ let UserService = class UserService {
     }
     async create(data) {
         try {
-            return await this.userRepository.create(data);
+            const saltOrRounds = 10;
+            const password = data.password;
+            const hash = await bcrypt.hash(password, saltOrRounds);
+            const param = {
+                name: data.name,
+                email: data.email,
+                password: hash
+            };
+            return await this.userRepository.create(param);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to create user: ${error.message}`);
@@ -66,6 +75,22 @@ let UserService = class UserService {
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to delete user: ${error.message}`);
+        }
+    }
+    async login(data) {
+        try {
+            const user = await this.userRepository.findByEmail(data.email);
+            if (!user) {
+                throw new common_1.NotFoundException(`User with email ${data.email} not found.`);
+            }
+            const isMatch = await bcrypt.compare(data.password, user.password);
+            if (!isMatch) {
+                throw new common_1.NotFoundException(`The password was incorrect.`);
+            }
+            return user;
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(`Failed to login: ${error.message}`);
         }
     }
 };

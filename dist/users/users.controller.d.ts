@@ -5,7 +5,8 @@ export declare class UsersController {
     constructor(userService: UserService);
     findById(email: string): Promise<User | null>;
     findAll(): Promise<User[]>;
-    create(userData: any): Promise<User>;
+    create(userData: Prisma.UserCreateInput): Promise<User>;
     update(id: number, userData: Prisma.UserUpdateInput): Promise<User>;
     delete(id: number): Promise<User>;
+    login(userData: any): Promise<User>;
 }

@@ -16,7 +16,7 @@ let UserRepository = class UserRepository {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findById(email) {
+    async findByEmail(email) {
         const findOne = await this.prisma.user.findFirst({
             where: {
                 email: email

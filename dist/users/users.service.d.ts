@@ -11,4 +11,5 @@ export declare class UserService {
         data: Prisma.UserUpdateInput;
     }): Promise<User>;
     delete(id: number): Promise<User>;
+    login(data: any): Promise<User>;
 }

@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String
+  password String
+}
+
+model Client {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name     String
+  phone    String
+  address  String
+  document String    @unique
+  vehicles Vehicle[]
+}
+
+model Vehicle {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name     String
+  plate    String
+  color    String
+  year     Int
+  city     String
+  clientId String @db.ObjectId
+  client   Client @relation(fields: [clientId], references: [id])
+}
+
+model Services {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  description String
+  code        String
+  value       Float
+  brand       String
+  Budget      Budget?      @relation(fields: [budgetId], references: [id])
+  budgetId    String?      @db.ObjectId
+  BudgetItem  BudgetItem[]
+}
+
+model Products {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name       String
+  price      Float
+  brand      String
+  Budget     Budget?      @relation(fields: [budgetId], references: [id])
+  budgetId   String?      @db.ObjectId
+  BudgetItem BudgetItem[]
+}
+
+model Budget {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  services   Services[]
+  products   Products[]
+  totalValue Float
+  BudgetItem BudgetItem[]
+  budgetId   String?      @db.ObjectId
+}
+
+model BudgetItem {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  service    Services? @relation(fields: [servicesId], references: [id])
+  product    Products? @relation(fields: [productsId], references: [id])
+  quantity   Int
+  budgetId   String    @db.ObjectId
+  budget     Budget    @relation(fields: [budgetId], references: [id])
+  servicesId String?   @db.ObjectId
+  productsId String?   @db.ObjectId
+}

@@ -3,16 +3,18 @@ import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
 import { UserService } from './users.service';
 import { User, Prisma } from '@prisma/client';
 
-@Controller( 'users' )
+@Controller( 'user' )
 export class UsersController
 {
-    constructor ( private readonly userService: UserService ) { }
+    constructor (
+        private readonly userService: UserService
+    ) { }
 
     @Get( ':email' )
     async findById ( @Param( 'email' ) email: string ): Promise<User | null>
     {
 
-        const user = await this.userService.findById( email );
+        const user = await this.userService.findByEmail( email );
         return user;
 
     }
@@ -50,11 +52,10 @@ export class UsersController
         return user;
     }
 
-    @Post('/login')
-    async login ( @Body() userData: any ): Promise<User>
+    @Post( '/login' )
+    async login ( @Body() userData: any ): Promise<any>
     {
         const user = await this.userService.login( userData );
         return user;
-
     }
 }

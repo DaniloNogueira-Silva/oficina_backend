@@ -17,7 +17,7 @@ let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
-    async findById(email) {
+    async findByEmail(email) {
         try {
             const user = await this.userRepository.findByEmail(email);
             if (!user) {

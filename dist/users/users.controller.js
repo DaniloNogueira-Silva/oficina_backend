@@ -21,7 +21,7 @@ let UsersController = class UsersController {
         this.userService = userService;
     }
     async findById(email) {
-        const user = await this.userService.findById(email);
+        const user = await this.userService.findByEmail(email);
         return user;
     }
     async findAll() {
@@ -89,7 +89,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
 exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('users'),
+    (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [users_service_1.UserService])
 ], UsersController);
 //# sourceMappingURL=users.controller.js.map

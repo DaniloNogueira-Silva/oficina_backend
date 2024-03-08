@@ -9,7 +9,7 @@ export class UserService
 {
     constructor ( private readonly userRepository: UserRepository ) { }
 
-    async findById ( email: string ): Promise<User | null>
+    async findByEmail( email: string ): Promise<User | null>
     {
         try
         {

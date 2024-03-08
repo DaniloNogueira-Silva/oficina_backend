@@ -14,6 +14,7 @@ const vehicles_module_1 = require("./vehicles/vehicles.module");
 const config_1 = require("@nestjs/config");
 const services_module_1 = require("./services/services.module");
 const users_module_1 = require("./users/users.module");
+const products_module_1 = require("./products/products.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,7 +28,8 @@ exports.AppModule = AppModule = __decorate([
             budgets_module_1.BudgetsModule,
             vehicles_module_1.VehiclesModule,
             services_module_1.ServicesModule,
-            users_module_1.UsersModule
+            users_module_1.UsersModule,
+            products_module_1.ProductsModule
         ],
         controllers: [],
         providers: [],

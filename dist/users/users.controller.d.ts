@@ -8,5 +8,5 @@ export declare class UsersController {
     create(userData: Prisma.UserCreateInput): Promise<User>;
     update(id: number, userData: Prisma.UserUpdateInput): Promise<User>;
     delete(id: number): Promise<User>;
-    login(userData: any): Promise<User>;
+    login(userData: any): Promise<any>;
 }

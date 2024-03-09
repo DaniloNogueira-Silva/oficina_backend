@@ -36,8 +36,6 @@ model Vehicle {
 
 model Budget {
   id         Int          @id @default(autoincrement())
-  services   Services[]
-  products   Products[]
   totalValue Float
   budgetItem BudgetItem[]
 }
@@ -47,9 +45,6 @@ model Services {
   description String
   code        String
   value       Float
-  brand       String
-  budget      Budget?      @relation(fields: [budgetId], references: [id])
-  budgetId    Int?
   budgetItem  BudgetItem[]
 }
 
@@ -58,8 +53,6 @@ model Products {
   name       String
   price      Float
   brand      String
-  budget     Budget?      @relation(fields: [budgetId], references: [id])
-  budgetId   Int?
   budgetItem BudgetItem[]
 }
 

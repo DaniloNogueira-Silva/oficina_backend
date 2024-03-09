@@ -15,7 +15,7 @@ export class ClientsService
             const client = await this.clientRepository.findById( id );
             if ( !client )
             {
-                throw new NotFoundException( `Client with email ${ id } not found.` );
+                throw new NotFoundException( `Client with id ${ id } not found.` );
             }
             return client;
         } catch ( error )

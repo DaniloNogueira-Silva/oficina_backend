@@ -20,7 +20,7 @@ let ClientsService = class ClientsService {
         try {
             const client = await this.clientRepository.findById(id);
             if (!client) {
-                throw new common_1.NotFoundException(`Client with email ${id} not found.`);
+                throw new common_1.NotFoundException(`Client with id ${id} not found.`);
             }
             return client;
         }

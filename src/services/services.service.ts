@@ -15,7 +15,7 @@ export class ServicesService
             const services = await this.servicesRepository.findById( id );
             if ( !services )
             {
-                throw new NotFoundException( `Services with email ${ id } not found.` );
+                throw new NotFoundException( `Services with id ${ id } not found.` );
             }
             return services;
         } catch ( error )

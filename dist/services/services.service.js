@@ -20,7 +20,7 @@ let ServicesService = class ServicesService {
         try {
             const services = await this.servicesRepository.findById(id);
             if (!services) {
-                throw new common_1.NotFoundException(`Services with email ${id} not found.`);
+                throw new common_1.NotFoundException(`Services with id ${id} not found.`);
             }
             return services;
         }

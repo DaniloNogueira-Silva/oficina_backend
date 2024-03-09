@@ -20,7 +20,7 @@ let VehiclesService = class VehiclesService {
         try {
             const vehicle = await this.vehicleRepository.findById(id);
             if (!vehicle) {
-                throw new common_1.NotFoundException(`Vehicle with email ${id} not found.`);
+                throw new common_1.NotFoundException(`Vehicle with id ${id} not found.`);
             }
             return vehicle;
         }

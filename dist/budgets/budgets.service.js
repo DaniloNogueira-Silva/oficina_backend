@@ -40,14 +40,12 @@ let BudgetsService = class BudgetsService {
     }
     async createPdf(id) {
         const budget = await this.findById(id);
-        console.log(budget);
         const filePath = path.join(process.cwd(), 'templates', 'pdf-profile.hbs');
-        console.log(filePath);
         return (0, nestjs_html_pdf_1.createPdf)(filePath);
     }
-    async create(data) {
+    async create(data, clientId) {
         try {
-            return await this.budgetRepository.create(data);
+            return await this.budgetRepository.create(data, clientId);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to create budget: ${error.message}`);

@@ -5,7 +5,7 @@ export declare class BudgetRepository {
     constructor(prisma: PrismaService);
     findById(id: number): Promise<Budget>;
     findAll(): Promise<Budget[]>;
-    create(data: any[]): Promise<Budget>;
+    create(data: any[], clientId: number): Promise<Budget>;
     update(budgetId: number, data: any[]): Promise<Budget>;
     delete(id: number): Promise<Budget>;
 }

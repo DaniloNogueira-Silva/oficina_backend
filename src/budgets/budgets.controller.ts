@@ -28,7 +28,9 @@ export class BudgetsController
     @Post()
     async create ( @Body() budgetData: any ): Promise<Budget>
     {
-        const budget = await this.budgetService.create( budgetData );
+        const clientId = budgetData.clientId;
+        const budgetItems = budgetData.budgetItems;
+        const budget = await this.budgetService.create( budgetItems, clientId );
         return budget;
 
     };

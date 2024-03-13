@@ -45,9 +45,10 @@ let BudgetRepository = class BudgetRepository {
             }
         });
     }
-    async create(data) {
+    async create(data, clientId) {
         const createdBudget = await this.prisma.budget.create({
             data: {
+                clientId: clientId,
                 totalValue: 0
             }
         });

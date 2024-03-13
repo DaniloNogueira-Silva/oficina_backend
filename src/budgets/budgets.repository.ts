@@ -41,10 +41,11 @@ export class BudgetRepository
         } );
     }
 
-    async create ( data: any[] ): Promise<Budget>
+    async create ( data: any[], clientId: number ): Promise<Budget>
     {
         const createdBudget = await this.prisma.budget.create( {
             data: {
+                clientId: clientId,
                 totalValue: 0
             }
         } );

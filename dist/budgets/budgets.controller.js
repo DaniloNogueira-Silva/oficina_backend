@@ -30,7 +30,9 @@ let BudgetsController = class BudgetsController {
     }
     ;
     async create(budgetData) {
-        const budget = await this.budgetService.create(budgetData);
+        const clientId = budgetData.clientId;
+        const budgetItems = budgetData.budgetItems;
+        const budget = await this.budgetService.create(budgetItems, clientId);
         return budget;
     }
     ;

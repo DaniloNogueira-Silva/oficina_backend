@@ -37,20 +37,18 @@ export class BudgetsService
         }
     }
 
-    async createPdf (id: number): Promise<any>
+    async createPdf ( id: number ): Promise<any>
     {
-        const budget = await this.findById(id);
-        console.log(budget);
+        const budget = await this.findById( id );
         const filePath = path.join( process.cwd(), 'templates', 'pdf-profile.hbs' );
-        console.log(filePath);
         return createPdf( filePath );
     }
 
-    async create ( data: any ): Promise<Budget>
+    async create ( data: any, clientId: number ): Promise<Budget>
     {
         try
         {
-            return await this.budgetRepository.create( data );
+            return await this.budgetRepository.create( data, clientId );
         } catch ( error )
         {
             throw new BadRequestException( `Failed to create budget: ${ error.message }` );

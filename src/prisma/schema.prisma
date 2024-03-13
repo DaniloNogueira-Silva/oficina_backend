@@ -21,6 +21,7 @@ model Client {
   address  String
   document String    @unique
   vehicles Vehicle[]
+  Budget   Budget[]
 }
 
 model Vehicle {
@@ -37,6 +38,8 @@ model Vehicle {
 model Budget {
   id         Int          @id @default(autoincrement())
   totalValue Float
+  clientId   Int
+  client     Client       @relation(fields: [clientId], references: [id])
   budgetItem BudgetItem[]
 }
 

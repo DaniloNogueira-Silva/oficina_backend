@@ -6,7 +6,7 @@ export declare class BudgetsService {
     findById(id: number): Promise<Budget | null>;
     findAll(): Promise<Budget[]>;
     createPdf(id: number): Promise<any>;
-    create(data: any): Promise<Budget>;
+    create(data: any, clientId: number): Promise<Budget>;
     update(budgetId: number, data: any): Promise<Budget>;
     delete(id: number): Promise<Budget>;
 }

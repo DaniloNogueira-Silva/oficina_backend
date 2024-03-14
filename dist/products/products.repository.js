@@ -35,6 +35,7 @@ let ProductsRepository = class ProductsRepository {
                 name: data.name,
                 price: data.price,
                 brand: data.brand,
+                code: data.code
             }
         });
     }

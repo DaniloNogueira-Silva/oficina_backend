@@ -3,7 +3,7 @@ import { Budget } from '@prisma/client';
 export declare class BudgetsService {
     private readonly budgetRepository;
     constructor(budgetRepository: BudgetRepository);
-    findById(id: number): Promise<Budget | null>;
+    findById(id: number): Promise<any | null>;
     findAll(): Promise<Budget[]>;
     createPdf(id: number): Promise<any>;
     create(data: any, clientId: number): Promise<Budget>;

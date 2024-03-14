@@ -9,7 +9,7 @@ export class BudgetRepository
 {
     constructor ( private prisma: PrismaService ) { }
 
-    async findById ( id: number ): Promise<Budget>
+    async findById ( id: number ): Promise<any>
     {
         const numberId = Number( id );
         return await this.prisma.budget.findUnique( {
@@ -21,6 +21,11 @@ export class BudgetRepository
                     include: {
                         service: true,
                         product: true
+                    }
+                },
+                client: {
+                    include: {
+                        vehicles: true
                     }
                 }
             }
@@ -145,10 +150,20 @@ export class BudgetRepository
     async delete ( id: number ): Promise<Budget>
     {
         const numberId = Number( id );
-        return await this.prisma.budget.delete( {
+
+        // Primeiro, remova os itens de orçamento associados a este orçamento
+        await this.prisma.budgetItem.deleteMany( {
             where: {
-                id: numberId
+                budgetId: numberId,
             },
         } );
-    };
+
+        // Em seguida, exclua o próprio orçamento
+        return await this.prisma.budget.delete( {
+            where: {
+                id: numberId,
+            },
+        } );
+    }
+
 }

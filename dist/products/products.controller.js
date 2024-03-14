@@ -34,7 +34,8 @@ let ProductsController = class ProductsController {
         const productsData = {
             name: body.name,
             brand: body.brand,
-            price: body.value
+            price: body.value,
+            code: body.code
         };
         const products = await this.productsService.create(productsData);
         return products;

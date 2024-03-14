@@ -40,8 +40,55 @@ let BudgetsService = class BudgetsService {
     }
     async createPdf(id) {
         const budget = await this.findById(id);
+        const agora = new Date();
+        const hora = agora.getHours();
+        const minutos = agora.getMinutes();
+        const actualHour = `Hora atual: ${hora}:${minutos}`;
+        const totalValue = budget.budgetItem.reduce((total, item) => {
+            const itemValue = item.service ? item.service.value * item.quantity : item.product?.price * item.quantity;
+            return total + itemValue;
+        }, 0);
+        const itemsLength = budget.budgetItem.length;
+        const validade = new Date();
+        validade.setDate(validade.getDate() + 5);
+        const data = {
+            numero_orcamento: budget.id,
+            data: agora.toLocaleDateString('pt-BR'),
+            validade: validade.toLocaleDateString('pt-BR'),
+            cliente: budget.client.name,
+            endereco: budget.client.address,
+            documento: budget.client.document,
+            fone: budget.client.phone,
+            hora: actualHour,
+            veiculo: budget.client.vehicles[0].name,
+            placa: budget.client.vehicles[0].plate,
+            cidade: budget.client.vehicles[0].city,
+            classe: budget.client.vehicles[0].name,
+            cor: budget.client.vehicles[0].color,
+            ano: budget.client.vehicles[0].year,
+            items: budget.budgetItem.map(item => ({
+                qtd: item.quantity,
+                codigo: item.service ? item.service.code : item.product?.code,
+                descricao: item.service ? item.service.description : item.product?.name,
+                marca: item.service ? "Não tem" : item.product?.brand,
+                valor: item.service ? item.service.value : item.product?.price,
+                valor_total: item.service ? item.service.value * item.quantity : item.product?.price * item.quantity
+            })),
+            total: totalValue,
+            totalItems: itemsLength
+        };
+        const options = {
+            format: 'A4',
+            margin: {
+                left: '10mm',
+                top: '0mm',
+                right: '10mm',
+                bottom: '15mm',
+            },
+            landscape: false,
+        };
         const filePath = path.join(process.cwd(), 'templates', 'pdf-profile.hbs');
-        return (0, nestjs_html_pdf_1.createPdf)(filePath);
+        return (0, nestjs_html_pdf_1.createPdf)(filePath, options, data);
     }
     async create(data, clientId) {
         try {

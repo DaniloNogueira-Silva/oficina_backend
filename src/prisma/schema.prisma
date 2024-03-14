@@ -56,6 +56,7 @@ model Products {
   name       String
   price      Float
   brand      String
+  code        String
   budgetItem BudgetItem[]
 }
 

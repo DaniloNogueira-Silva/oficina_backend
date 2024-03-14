@@ -39,7 +39,7 @@
     .footer-body {
       justify-content: space-between;
       display: flex;
-       border-top: 1px solid black;
+      border-top: 1px solid black;
       border-bottom: 1px solid black;
     }
 
@@ -85,22 +85,23 @@
     </div>
 
     <div class="header">
-      <p>COTAÇÃO - 965341</p>
-      <p>DATA: 28/02/2024</p>
-      <p>VI: ÉDER SILVA CUNHA</p>
-      <p>VE: (quem fez o orçamento)</p>
+      <p><strong>COTAÇÃO</strong> - {{numero_orcamento}}</p>
+      <p><strong>VI:</strong> ÉDER SILVA CUNHA</p>
+      <p><strong>DATA:</strong> {{data}}</p>
     </div>
 
     <div class="info">
-      <p>Cliente........... &nbsp; C999999 &nbsp; VENDA CONSUMIDOR &nbsp; DEP: MATRIZ BTS - S.P.</p>
-      <p>Endereco........ &nbsp; NF:</p>
-      <p>Cidade............ &nbsp; 14405-440 &nbsp; FRANCA &nbsp; - SP &nbsp; HORA: 10:00</p>
-      <p>CPF/CNPJ...... &nbsp; 000.000.000-00 &nbsp; INSC/RG: &nbsp; </p>
-      <p>FONE............ &nbsp; ( 016 ) &nbsp; FAX... &nbsp; ( 016 )</p>
+      <p><strong>Cliente:</strong> {{ cliente }} VENDA CONSUMIDOR &nbsp; DEP: MATRIZ BTS - S.P.</p>
+      <p><strong>Endereco:</strong> {{endereco}}&nbsp; NF:</p>
+      <p><strong>Cidade:</strong> {{cidade}} &nbsp; HORA: {{hora}}</p>
+      <p><strong>CPF/CNPJ:</strong> {{documento}} </p>
+      <p><strong>FONE:</strong>{{fone}}</p>
     </div>
 
     <div class="info">
-      <p>VEICULO &nbsp; PLACA: &nbsp; CIDADE: &nbsp; CLASSE: &nbsp; COR: &nbsp; ANO:</p>
+      <p><strong>VEICULO:</strong> {{veiculo}}&nbsp; <strong>PLACA:</strong> {{placa}} &nbsp; <strong>CIDADE:</strong>
+        {{cidade}} &nbsp; <strong>CLASSE:</strong> {{classe}} &nbsp; <strong>COR:</strong>
+        {{cor}} &nbsp; <strong>ANO:</strong> {{ano}}</p>
     </div>
 
     <div class="table-container">
@@ -114,21 +115,20 @@
             <th>MARCA</th>
             <th>VL. UNID</th>
             <th>VL. TOTAL</th>
-            <th>IPI</th>
           </tr>
         </thead>
         <tbody>
+          {{#each items}}
           <tr>
-            <td>4,00</td>
+            <td>{{qtd}}</td>
             <td>PC</td>
-            <td>30991</td>
-            <td style="color: rgb(73, 73, 73);">TAMBOR CARRETA DIANT/TRAS FORD CARGO/VW CUMMINS 1 FACCHINI RO/VW CUMMINS
-              10-FUROS VOLVO TRAS VM</td>
-            <td style="color: rgb(73, 73, 73);">FACCHINI R</td>
-            <td>498,0000</td>
-            <td>1.992,00</td>
-            <td>0</td>
+            <td>{{codigo}}</td>
+            <td style="color: rgb(73, 73, 73);">{{descricao}}</td>
+            <td style="color: rgb(73, 73, 73);">{{marca}}</td>
+            <td>{{valor}}</td>
+            <td>{{valor_total}}</td>
           </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>
@@ -136,14 +136,13 @@
     <footer class="footer">
 
       <div class="footer-body">
-        <P>QTDE DE ITENS: (pegar depois) </P>
-        <P>QTDE DE PROD: (pegar depois) </P>
-        <P></strong>VALIDADE:</strong> (colocar data + 5)</P>
+        <P>QTDE DE ITENS: {{totalItems}} </P>
+        <P></strong>VALIDADE:</strong> {{data}}</P>
       </div>
 
       <div class="footer-header">
-        <p>DATA DE PAGTO: (colocar data) </p>
-        <p><strong>TOTAL: (colocar total)</strong> </p>
+        <p>DATA DE PAGTO: ___________ </p>
+        <p><strong>TOTAL: {{total}}</strong> </p>
       </div>
     </footer>
   </div>

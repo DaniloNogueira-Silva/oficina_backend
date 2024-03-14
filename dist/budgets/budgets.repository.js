@@ -28,6 +28,11 @@ let BudgetRepository = class BudgetRepository {
                         service: true,
                         product: true
                     }
+                },
+                client: {
+                    include: {
+                        vehicles: true
+                    }
                 }
             }
         });
@@ -119,13 +124,17 @@ let BudgetRepository = class BudgetRepository {
     }
     async delete(id) {
         const numberId = Number(id);
+        await this.prisma.budgetItem.deleteMany({
+            where: {
+                budgetId: numberId,
+            },
+        });
         return await this.prisma.budget.delete({
             where: {
-                id: numberId
+                id: numberId,
             },
         });
     }
-    ;
 };
 exports.BudgetRepository = BudgetRepository;
 exports.BudgetRepository = BudgetRepository = __decorate([

@@ -46,16 +46,21 @@ export class BudgetRepository
         } );
     }
 
-    async create ( data: any[], clientId: number ): Promise<Budget>
+    async create (
+        data: any[],
+        clientId: number,
+        totalService?: number,
+        totalProduct?: number
+    ): Promise<Budget>
     {
         const createdBudget = await this.prisma.budget.create( {
             data: {
                 clientId: clientId,
-                totalValue: 0
+                totalValue: ( totalService ?? 0 ) + ( totalProduct ?? 0 ) // Use optional chaining operator and default to 0 if the values are undefined
             }
         } );
 
-        let totalValue = 0;
+        let totalValue = createdBudget.totalValue ?? 0; // Initialize totalValue with the current totalValue of createdBudget
 
         for ( const itemData of data )
         {

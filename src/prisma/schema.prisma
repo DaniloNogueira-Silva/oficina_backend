@@ -47,14 +47,14 @@ model Services {
   id          Int          @id @default(autoincrement())
   description String
   code        String
-  value       Float
+  value       Float?
   budgetItem  BudgetItem[]
 }
 
 model Products {
   id         Int          @id @default(autoincrement())
   name       String
-  price      Float
+  price      Float?
   brand      String
   code        String
   budgetItem BudgetItem[]

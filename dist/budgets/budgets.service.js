@@ -90,9 +90,9 @@ let BudgetsService = class BudgetsService {
         const filePath = path.join(process.cwd(), 'templates', 'pdf-profile.hbs');
         return (0, nestjs_html_pdf_1.createPdf)(filePath, options, data);
     }
-    async create(data, clientId) {
+    async create(data, clientId, totalService, totalProduct) {
         try {
-            return await this.budgetRepository.create(data, clientId);
+            return await this.budgetRepository.create(data, clientId, totalService, totalProduct);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to create budget: ${error.message}`);

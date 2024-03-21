@@ -32,7 +32,9 @@ let BudgetsController = class BudgetsController {
     async create(budgetData) {
         const clientId = budgetData.clientId;
         const budgetItems = budgetData.budgetItems;
-        const budget = await this.budgetService.create(budgetItems, clientId);
+        const totalService = budgetData.totalService || 0;
+        const totalProduct = budgetData.totalProduct || 0;
+        const budget = await this.budgetService.create(budgetItems, clientId, totalService, totalProduct);
         return budget;
     }
     ;
@@ -49,9 +51,13 @@ let BudgetsController = class BudgetsController {
     async generatePdf(id, res) {
         try {
             const buffer = await this.budgetService.createPdf(id);
+            if (!buffer) {
+                throw new Error("PDF buffer is undefined or empty.");
+            }
             res.set({
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': `attachment; filename=pdf.pdf`,
+                'Content-Length': buffer.length,
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 Pragma: 'no-cache',
                 Expires: 0,

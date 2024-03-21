@@ -47,16 +47,21 @@ let BudgetsController = class BudgetsController {
     }
     ;
     async generatePdf(id, res) {
-        const buffer = await this.budgetService.createPdf(id);
-        res.set({
-            'Content-Type': 'application/pdf',
-            'Content-Disposition': `attachment; filename=pdf.pdf`,
-            'Content-Length': buffer.length,
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            Pragma: 'no-cache',
-            Expires: 0,
-        });
-        res.end(buffer);
+        try {
+            const buffer = await this.budgetService.createPdf(id);
+            res.set({
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `attachment; filename=pdf.pdf`,
+                'Content-Length': buffer.length,
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                Pragma: 'no-cache',
+                Expires: 0,
+            });
+            res.end(buffer);
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(`Falha ao gerar PDF: ${error.message}`);
+        }
     }
 };
 exports.BudgetsController = BudgetsController;

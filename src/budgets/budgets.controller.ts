@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Param, Put, Delete, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, Res, BadRequestException } from '@nestjs/common';
 import { BudgetsService } from './budgets.service';
 import { Budget } from '@prisma/client';
 
@@ -53,19 +53,25 @@ export class BudgetsController
     };
 
     @Get( 'pdf/:id' )
-    async generatePdf(@Param('id') id: number, @Res() res) 
+    async generatePdf ( @Param( 'id' ) id: number, @Res() res ) 
     {
-        const buffer = await this.budgetService.createPdf(id);
-        res.set( {
-            // pdf
-            'Content-Type': 'application/pdf',
-            'Content-Disposition': `attachment; filename=pdf.pdf`,
-            'Content-Length': buffer.length,
-            // prevent cache
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            Pragma: 'no-cache',
-            Expires: 0,
-        } );
-        res.end( buffer );
+        try
+        {
+            const buffer = await this.budgetService.createPdf( id );
+            res.set( {
+                // pdf
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `attachment; filename=pdf.pdf`,
+                'Content-Length': buffer.length,
+                // prevent cache
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                Pragma: 'no-cache',
+                Expires: 0,
+            } );
+            res.end( buffer );
+        } catch ( error )
+        {
+            throw new BadRequestException( `Falha ao gerar PDF: ${ error.message }` );
+        }
     }
 };

@@ -58,11 +58,12 @@ export class BudgetsController
         try
         {
             const buffer = await this.budgetService.createPdf( id );
+            const bufferLenght = buffer.length;
             res.set( {
                 // pdf
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': `attachment; filename=pdf.pdf`,
-                // 'Content-Length': buffer.length,
+                'Content-Length': bufferLenght,
                 // prevent cache
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 Pragma: 'no-cache',

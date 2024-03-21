@@ -62,7 +62,7 @@ export class BudgetsController
                 // pdf
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': `attachment; filename=pdf.pdf`,
-                'Content-Length': buffer.length,
+                // 'Content-Length': buffer.length,
                 // prevent cache
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 Pragma: 'no-cache',

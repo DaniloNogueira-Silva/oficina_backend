@@ -52,7 +52,6 @@ let BudgetsController = class BudgetsController {
             res.set({
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': `attachment; filename=pdf.pdf`,
-                'Content-Length': buffer.length,
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 Pragma: 'no-cache',
                 Expires: 0,

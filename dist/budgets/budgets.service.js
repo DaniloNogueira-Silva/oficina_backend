@@ -40,14 +40,12 @@ let BudgetsService = class BudgetsService {
     }
     async createPdf(id) {
         const budget = await this.findById(id);
+        console.log(budget);
         const agora = new Date();
         const hora = agora.getHours();
         const minutos = agora.getMinutes();
         const actualHour = `Hora atual: ${hora}:${minutos}`;
-        const totalValue = budget.budgetItem.reduce((total, item) => {
-            const itemValue = item.service ? item.service.value * item.quantity : item.product?.price * item.quantity;
-            return total + itemValue;
-        }, 0);
+        const totalValue = budget.totalValue;
         const itemsLength = budget.budgetItem.length;
         const validade = new Date();
         validade.setDate(validade.getDate() + 5);

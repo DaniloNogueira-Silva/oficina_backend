@@ -45,7 +45,7 @@ let BudgetsService = class BudgetsService {
         const hora = agora.getHours();
         const minutos = agora.getMinutes();
         const actualHour = `Hora atual: ${hora}:${minutos}`;
-        const totalValue = budget.totalValue;
+        const totalValue = budget.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         const itemsLength = budget.budgetItem.length;
         const validade = new Date();
         validade.setDate(validade.getDate() + 5);

@@ -49,7 +49,7 @@ export class BudgetsService
         const actualHour = `Hora atual: ${ hora }:${ minutos }`;
 
         // Calcula o total dos valores totais dos itens do orçamento
-        const totalValue = budget.totalValue
+        const totalValue = budget.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
         const itemsLength = budget.budgetItem.length
 

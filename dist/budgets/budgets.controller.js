@@ -54,15 +54,7 @@ let BudgetsController = class BudgetsController {
             if (!buffer) {
                 throw new Error("PDF buffer is undefined or empty.");
             }
-            res.set({
-                'Content-Type': 'application/pdf',
-                'Content-Disposition': `attachment; filename=pdf.pdf`,
-                'Content-Length': buffer.length,
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                Pragma: 'no-cache',
-                Expires: 0,
-            });
-            res.end(buffer);
+            return res.send(buffer);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Falha ao gerar PDF: ${error.message}`);

@@ -67,17 +67,19 @@ export class BudgetsController
             {
                 throw new Error( "PDF buffer is undefined or empty." );
             }
-            res.set( {
-                // pdf
-                'Content-Type': 'application/pdf',
-                'Content-Disposition': `attachment; filename=pdf.pdf`,
-                'Content-Length': buffer.length,
-                // prevent cache
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                Pragma: 'no-cache',
-                Expires: 0,
-            } );
-            res.end( buffer );
+
+            return res.send( buffer );
+            // res.set( {
+            //     // pdf
+            //     'Content-Type': 'application/pdf',
+            //     'Content-Disposition': `attachment; filename=pdf.pdf`,
+            //     'Content-Length': buffer.length,
+            //     // prevent cache
+            //     'Cache-Control': 'no-cache, no-store, must-revalidate',
+            //     Pragma: 'no-cache',
+            //     Expires: 0,
+            // } );
+            // res.end( buffer );
         } catch ( error )
         {
             throw new BadRequestException( `Falha ao gerar PDF: ${ error.message }` );

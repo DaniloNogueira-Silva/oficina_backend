@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BudgetsService = void 0;
 const common_1 = require("@nestjs/common");
 const budgets_repository_1 = require("./budgets.repository");
-const nestjs_html_pdf_1 = require("@saemhco/nestjs-html-pdf");
-const path = require("path");
 let BudgetsService = class BudgetsService {
     constructor(budgetRepository) {
         this.budgetRepository = budgetRepository;
@@ -75,18 +73,7 @@ let BudgetsService = class BudgetsService {
             total: totalValue,
             totalItems: itemsLength
         };
-        const options = {
-            format: 'A4',
-            margin: {
-                left: '10mm',
-                top: '0mm',
-                right: '10mm',
-                bottom: '15mm',
-            },
-            landscape: false,
-        };
-        const filePath = path.join(process.cwd(), 'templates', 'pdf-profile.hbs');
-        return (0, nestjs_html_pdf_1.createPdf)(filePath, options, data);
+        return data;
     }
     async create(data, clientId, totalService, totalProduct) {
         try {

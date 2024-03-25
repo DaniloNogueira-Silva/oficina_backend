@@ -8,5 +8,5 @@ export declare class BudgetsController {
     create(budgetData: any): Promise<Budget>;
     update(id: number, budgetData: any): Promise<Budget>;
     delete(id: number): Promise<Budget>;
-    generatePdf(id: number, res: any): Promise<void>;
+    generatePdf(id: number, res: any): Promise<any>;
 }

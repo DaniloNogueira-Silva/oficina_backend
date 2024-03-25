@@ -2,8 +2,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { BudgetRepository } from './budgets.repository';
 import { Budget } from '@prisma/client';
-import { createPdf } from '@saemhco/nestjs-html-pdf';
-import * as path from 'path';
+// import { createPdf } from '@saemhco/nestjs-html-pdf';
+// import * as path from 'path';
 
 @Injectable()
 export class BudgetsService
@@ -90,19 +90,20 @@ export class BudgetsService
             totalItems: itemsLength
         };
 
-        const options = {
-            format: 'A4',
-            margin: {
-                left: '10mm',
-                top: '0mm',
-                right: '10mm',
-                bottom: '15mm',
-            },
-            landscape: false,
-        };
+        return data;
+        // const options = {
+        //     format: 'A4',
+        //     margin: {
+        //         left: '10mm',
+        //         top: '0mm',
+        //         right: '10mm',
+        //         bottom: '15mm',
+        //     },
+        //     landscape: false,
+        // };
 
-        const filePath = path.join( process.cwd(), 'templates', 'pdf-profile.hbs' );
-        return createPdf( filePath, options, data );
+        // const filePath = path.join( process.cwd(), 'templates', 'pdf-profile.hbs' );
+        // return createPdf( filePath, options, data );
     }
 
     async create ( data: any, clientId: number, totalService?: number, totalProduct?: number ): Promise<Budget>

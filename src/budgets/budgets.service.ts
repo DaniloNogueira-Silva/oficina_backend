@@ -40,7 +40,6 @@ export class BudgetsService
     async createPdf ( id: number ): Promise<any>
     {
         const budget = await this.findById( id );
-        console.log( budget );
 
         const agora = new Date();
         const hora = agora.getHours();
@@ -87,7 +86,8 @@ export class BudgetsService
 
             // Total dos valores totais
             total: totalValue,
-            totalItems: itemsLength
+            totalItems: itemsLength,
+            validate: budget.validate
         };
 
         return data;

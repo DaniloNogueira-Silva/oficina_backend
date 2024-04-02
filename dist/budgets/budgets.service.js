@@ -38,19 +38,15 @@ let BudgetsService = class BudgetsService {
     }
     async createPdf(id) {
         const budget = await this.findById(id);
-        console.log(budget);
         const agora = new Date();
         const hora = agora.getHours();
         const minutos = agora.getMinutes();
         const actualHour = `Hora atual: ${hora}:${minutos}`;
         const totalValue = budget.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         const itemsLength = budget.budgetItem.length;
-        const validade = new Date();
-        validade.setDate(validade.getDate() + 5);
         const data = {
             numero_orcamento: budget.id,
             data: agora.toLocaleDateString('pt-BR'),
-            validade: validade.toLocaleDateString('pt-BR'),
             cliente: budget.client.name,
             endereco: budget.client.address,
             documento: budget.client.document,
@@ -71,13 +67,14 @@ let BudgetsService = class BudgetsService {
                 valor_total: item.service ? item.service.value * item.quantity : item.product?.price * item.quantity
             })),
             total: totalValue,
-            totalItems: itemsLength
+            totalItems: itemsLength,
+            validate: budget.validate
         };
         return data;
     }
-    async create(data, clientId, totalService, totalProduct) {
+    async create(data, clientId, validate, totalService, totalProduct) {
         try {
-            return await this.budgetRepository.create(data, clientId, totalService, totalProduct);
+            return await this.budgetRepository.create(data, clientId, validate, totalService, totalProduct);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to create budget: ${error.message}`);

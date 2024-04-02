@@ -49,7 +49,7 @@ export class BudgetRepository
     async create (
         data: any[],
         clientId: number,
-        validate: Date,
+        validate: string,
         totalService?: number,
         totalProduct?: number
     ): Promise<Budget>

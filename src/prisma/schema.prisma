@@ -38,7 +38,7 @@ model Vehicle {
 model Budget {
   id         Int          @id @default(autoincrement())
   totalValue Float
-  validate   DateTime?
+  validate   String?
   clientId   Int
   client     Client       @relation(fields: [clientId], references: [id])
   budgetItem BudgetItem[]

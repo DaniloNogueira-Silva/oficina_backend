@@ -52,15 +52,11 @@ export class BudgetsService
 
         const itemsLength = budget.budgetItem.length
 
-        const validade = new Date();
-        validade.setDate( validade.getDate() + 5 );
-
         // DADOS DO ORÇAMENTO
         const data = {
             // Header
             numero_orcamento: budget.id,
             data: agora.toLocaleDateString( 'pt-BR' ), // Formata a data atual
-            validade: validade.toLocaleDateString( 'pt-BR' ), // Formata a data de validade
             cliente: budget.client.name,
             endereco: budget.client.address,
             documento: budget.client.document,
@@ -89,7 +85,6 @@ export class BudgetsService
             totalItems: itemsLength,
             validate: budget.validate
         };
-
         return data;
         // const options = {
         //     format: 'A4',
@@ -106,7 +101,7 @@ export class BudgetsService
         // return createPdf( filePath, options, data );
     }
 
-    async create ( data: any, clientId: number, validate: Date, totalService?: number, totalProduct?: number ): Promise<Budget>
+    async create ( data: any, clientId: number, validate: string, totalService?: number, totalProduct?: number ): Promise<Budget>
     {
         try
         {

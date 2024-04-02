@@ -106,11 +106,11 @@ export class BudgetsService
         // return createPdf( filePath, options, data );
     }
 
-    async create ( data: any, clientId: number, totalService?: number, totalProduct?: number ): Promise<Budget>
+    async create ( data: any, clientId: number, validate: Date, totalService?: number, totalProduct?: number ): Promise<Budget>
     {
         try
         {
-            return await this.budgetRepository.create( data, clientId, totalService, totalProduct );
+            return await this.budgetRepository.create( data, clientId, validate, totalService, totalProduct );
         } catch ( error )
         {
             throw new BadRequestException( `Failed to create budget: ${ error.message }` );

@@ -49,6 +49,7 @@ export class BudgetRepository
     async create (
         data: any[],
         clientId: number,
+        validate: Date,
         totalService?: number,
         totalProduct?: number
     ): Promise<Budget>
@@ -56,6 +57,7 @@ export class BudgetRepository
         const createdBudget = await this.prisma.budget.create( {
             data: {
                 clientId: clientId,
+                validate: validate,
                 totalValue: ( totalService ?? 0 ) + ( totalProduct ?? 0 ) // Use optional chaining operator and default to 0 if the values are undefined
             }
         } );

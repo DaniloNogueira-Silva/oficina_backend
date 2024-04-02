@@ -30,11 +30,12 @@ export class BudgetsController
     {
         const clientId = budgetData.clientId;
         const budgetItems = budgetData.budgetItems;
+        const validate = budgetData.validate
         
         const totalService = budgetData.totalService || 0;
         const totalProduct = budgetData.totalProduct || 0;
 
-        const budget = await this.budgetService.create( budgetItems, clientId, totalService, totalProduct );
+        const budget = await this.budgetService.create( budgetItems, clientId, validate, totalService, totalProduct );
         return budget;
 
     };

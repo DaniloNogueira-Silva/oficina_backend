@@ -25,20 +25,23 @@ model Client {
 }
 
 model Vehicle {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
   plate    String
   color    String
   year     Int
   city     String
   clientId Int
-  client   Client @relation(fields: [clientId], references: [id])
+  client   Client   @relation(fields: [clientId], references: [id])
+  budget   Budget[]
 }
 
 model Budget {
   id         Int          @id @default(autoincrement())
   totalValue Float
   validate   String?
+  vehicleId  Int?
+  vehicle    Vehicle?     @relation(fields: [vehicleId], references: [id])
   clientId   Int
   client     Client       @relation(fields: [clientId], references: [id])
   budgetItem BudgetItem[]

@@ -51,14 +51,16 @@ export class BudgetRepository
         clientId: number,
         validate: string,
         totalService?: number,
-        totalProduct?: number
+        totalProduct?: number,
+        vehicleId?: number
     ): Promise<Budget>
     {
         const createdBudget = await this.prisma.budget.create( {
             data: {
                 clientId: clientId,
                 validate: validate,
-                totalValue: ( totalService ?? 0 ) + ( totalProduct ?? 0 ) // Use optional chaining operator and default to 0 if the values are undefined
+                totalValue: ( totalService ?? 0 ) + ( totalProduct ?? 0 ), // Use optional chaining operator and default to 0 if the values are undefined
+                vehicleId: vehicleId
             }
         } );
 

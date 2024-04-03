@@ -74,6 +74,7 @@ let BudgetsService = class BudgetsService {
     }
     async create(data, clientId, validate, totalService, totalProduct) {
         try {
+            console.log('Service', validate);
             return await this.budgetRepository.create(data, clientId, validate, totalService, totalProduct);
         }
         catch (error) {

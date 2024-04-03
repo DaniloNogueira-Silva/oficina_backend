@@ -30,7 +30,7 @@ export class BudgetsController
     {
         const clientId = budgetData.clientId;
         const budgetItems = budgetData.budgetItems;
-        const validate = budgetData.validate
+        const validate = budgetData.validate;
         
         const totalService = budgetData.totalService || 0;
         const totalProduct = budgetData.totalProduct || 0;

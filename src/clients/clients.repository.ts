@@ -22,7 +22,11 @@ export class ClientRepository
 
     async findAll (): Promise<Client[]>
     {
-        return await this.prisma.client.findMany();
+        return await this.prisma.client.findMany({
+            include: {
+                vehicles: true
+            }
+        });
     };
 
     async create ( data: Prisma.ClientCreateInput ): Promise<Client>

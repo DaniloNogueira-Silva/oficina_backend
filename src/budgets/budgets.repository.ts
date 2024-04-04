@@ -41,7 +41,8 @@ export class BudgetRepository
                         service: true,
                         product: true
                     }
-                }
+                },
+                client: true
             }
         } );
     }

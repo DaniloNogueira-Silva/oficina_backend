@@ -2,13 +2,17 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { BudgetRepository } from './budgets.repository';
 import { Budget } from '@prisma/client';
+import { VehicleRepository } from 'src/vehicles/vehicles.repository';
 // import { createPdf } from '@saemhco/nestjs-html-pdf';
 // import * as path from 'path';
 
 @Injectable()
 export class BudgetsService
 {
-    constructor ( private readonly budgetRepository: BudgetRepository ) { }
+    constructor ( 
+        private readonly budgetRepository: BudgetRepository,
+        private readonly vehicleRepository: VehicleRepository
+     ) { }
 
     async findById ( id: number ): Promise<any | null>
     {
@@ -41,6 +45,8 @@ export class BudgetsService
     {
         const budget = await this.findById( id );
 
+        const vehicle = await this.vehicleRepository.findById(budget.vehicleId)
+
         const agora = new Date();
         const hora = agora.getHours();
         const minutos = agora.getMinutes();
@@ -63,12 +69,12 @@ export class BudgetsService
             fone: budget.client.phone,
             hora: actualHour,
 
-            veiculo: budget.client.vehicles[ 0 ].name,
-            placa: budget.client.vehicles[ 0 ].plate,
-            cidade: budget.client.vehicles[ 0 ].city,
-            classe: budget.client.vehicles[ 0 ].name,
-            cor: budget.client.vehicles[ 0 ].color,
-            ano: budget.client.vehicles[ 0 ].year,
+            veiculo: vehicle.name,
+            placa: vehicle.plate,
+            cidade: vehicle.city,
+            classe: vehicle.name,
+            cor: vehicle.color,
+            ano: vehicle.year,
 
             // Itens do orçamento
             items: budget.budgetItem.map( item => ( {

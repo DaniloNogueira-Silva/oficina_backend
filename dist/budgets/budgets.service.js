@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BudgetsService = void 0;
 const common_1 = require("@nestjs/common");
 const budgets_repository_1 = require("./budgets.repository");
+const vehicles_repository_1 = require("../vehicles/vehicles.repository");
 let BudgetsService = class BudgetsService {
-    constructor(budgetRepository) {
+    constructor(budgetRepository, vehicleRepository) {
         this.budgetRepository = budgetRepository;
+        this.vehicleRepository = vehicleRepository;
     }
     async findById(id) {
         try {
@@ -38,6 +40,7 @@ let BudgetsService = class BudgetsService {
     }
     async createPdf(id) {
         const budget = await this.findById(id);
+        const vehicle = await this.vehicleRepository.findById(budget.vehicleId);
         const agora = new Date();
         const hora = agora.getHours();
         const minutos = agora.getMinutes();
@@ -52,12 +55,12 @@ let BudgetsService = class BudgetsService {
             documento: budget.client.document,
             fone: budget.client.phone,
             hora: actualHour,
-            veiculo: budget.client.vehicles[0].name,
-            placa: budget.client.vehicles[0].plate,
-            cidade: budget.client.vehicles[0].city,
-            classe: budget.client.vehicles[0].name,
-            cor: budget.client.vehicles[0].color,
-            ano: budget.client.vehicles[0].year,
+            veiculo: vehicle.name,
+            placa: vehicle.plate,
+            cidade: vehicle.city,
+            classe: vehicle.name,
+            cor: vehicle.color,
+            ano: vehicle.year,
             items: budget.budgetItem.map(item => ({
                 qtd: item.quantity,
                 codigo: item.service ? item.service.code : item.product?.code,
@@ -72,10 +75,9 @@ let BudgetsService = class BudgetsService {
         };
         return data;
     }
-    async create(data, clientId, validate, totalService, totalProduct) {
+    async create(data, clientId, validate, totalService, totalProduct, vehicleId) {
         try {
-            console.log('Service', validate);
-            return await this.budgetRepository.create(data, clientId, validate, totalService, totalProduct);
+            return await this.budgetRepository.create(data, clientId, validate, totalService, totalProduct, vehicleId);
         }
         catch (error) {
             throw new common_1.BadRequestException(`Failed to create budget: ${error.message}`);
@@ -109,6 +111,7 @@ let BudgetsService = class BudgetsService {
 exports.BudgetsService = BudgetsService;
 exports.BudgetsService = BudgetsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [budgets_repository_1.BudgetRepository])
+    __metadata("design:paramtypes", [budgets_repository_1.BudgetRepository,
+        vehicles_repository_1.VehicleRepository])
 ], BudgetsService);
 //# sourceMappingURL=budgets.service.js.map

@@ -12,13 +12,14 @@ const budgets_controller_1 = require("./budgets.controller");
 const budgets_service_1 = require("./budgets.service");
 const budgets_repository_1 = require("./budgets.repository");
 const prisma_service_1 = require("../prisma/prisma.service");
+const vehicles_repository_1 = require("../vehicles/vehicles.repository");
 let BudgetsModule = class BudgetsModule {
 };
 exports.BudgetsModule = BudgetsModule;
 exports.BudgetsModule = BudgetsModule = __decorate([
     (0, common_1.Module)({
         controllers: [budgets_controller_1.BudgetsController],
-        providers: [budgets_service_1.BudgetsService, budgets_repository_1.BudgetRepository, prisma_service_1.PrismaService]
+        providers: [budgets_service_1.BudgetsService, budgets_repository_1.BudgetRepository, prisma_service_1.PrismaService, vehicles_repository_1.VehicleRepository]
     })
 ], BudgetsModule);
 //# sourceMappingURL=budgets.module.js.map

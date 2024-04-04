@@ -33,10 +33,10 @@ let BudgetsController = class BudgetsController {
         const clientId = budgetData.clientId;
         const budgetItems = budgetData.budgetItems;
         const validate = budgetData.validate;
-        console.log('Controller', budgetData.validate);
+        const vehicleId = budgetData.vehicleId;
         const totalService = budgetData.totalService || 0;
         const totalProduct = budgetData.totalProduct || 0;
-        const budget = await this.budgetService.create(budgetItems, clientId, validate, totalService, totalProduct);
+        const budget = await this.budgetService.create(budgetItems, clientId, validate, totalService, totalProduct, vehicleId);
         return budget;
     }
     ;

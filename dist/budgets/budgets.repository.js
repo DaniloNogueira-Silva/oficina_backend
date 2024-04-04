@@ -50,13 +50,13 @@ let BudgetRepository = class BudgetRepository {
             }
         });
     }
-    async create(data, clientId, validate, totalService, totalProduct) {
-        console.log('Repository', validate);
+    async create(data, clientId, validate, totalService, totalProduct, vehicleId) {
         const createdBudget = await this.prisma.budget.create({
             data: {
                 clientId: clientId,
                 validate: validate,
-                totalValue: (totalService ?? 0) + (totalProduct ?? 0)
+                totalValue: (totalService ?? 0) + (totalProduct ?? 0),
+                vehicleId: vehicleId
             }
         });
         let totalValue = createdBudget.totalValue ?? 0;

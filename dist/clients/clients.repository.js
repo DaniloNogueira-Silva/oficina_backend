@@ -26,7 +26,11 @@ let ClientRepository = class ClientRepository {
     }
     ;
     async findAll() {
-        return await this.prisma.client.findMany();
+        return await this.prisma.client.findMany({
+            include: {
+                vehicles: true
+            }
+        });
     }
     ;
     async create(data) {

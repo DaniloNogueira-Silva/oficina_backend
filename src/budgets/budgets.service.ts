@@ -44,6 +44,7 @@ export class BudgetsService
     async createPdf ( id: number ): Promise<any>
     {
         const budget = await this.findById( id );
+        console.log( budget );
 
         const vehicle = await this.vehicleRepository.findById(budget.vehicleId)
 

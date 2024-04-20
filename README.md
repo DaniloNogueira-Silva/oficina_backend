@@ -1,6 +1,3 @@
-Entendi, vamos corrigir isso. Aqui está a resposta completa dentro do markdown do README:
-
-```markdown
 # Sobre o Projeto
 
 - **Autor:** Danilo Nogueira Silva 24157 – Engenharia de Software

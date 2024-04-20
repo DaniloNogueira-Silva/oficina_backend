@@ -1,22 +1,57 @@
-# SOBRE O PROJETO
-- Foi um trabalho feito em conjunto com o meu colega de sala Éder Júnior, onde ele fez o frontend e eu o backend. Desenvolvemos uma aplicação web para gerenciar uma oficina, com capacidade de cadastrar clientes, veículos, serviços e gerar orçamentos.
+Entendi, vamos corrigir isso. Aqui está a resposta completa dentro do markdown do README:
 
-# COMANDOS PRA INSTALAR
-## Instalar dependencias e banco
-- Precisa colocar a url do banco no env do projeto
-- npm install (para instalar as dependencias)
-- cd src
-- npx prisma migrate dev
-- npm run start:dev (para iniciar a aplicação)
+```markdown
+# Sobre o Projeto
 
+- **Autor:** Danilo Nogueira Silva 24157 – Engenharia de Software
+- **Frontend:** [Auto Mechanic](https://auto-mechanic-silva.vercel.app/)
+  - **Login:** eder@gmail.com 
+  - **Senha:** password
+- **Backend:** [Oficina Backend](https://oficina-backend.vercel.app/)
+- **Repositório do Backend:** [GitHub](https://github.com/DaniloNogueira-Silva/oficina_backend)
 
-# TECNOLOGIAS UTILIZADAS
-- Nestjs (framework do nodejs)
-- Prisma
+O projeto foi uma colaboração entre Danilo Nogueira Silva e Éder Júnior. O frontend foi desenvolvido por Éder, enquanto Danilo trabalhou no backend. A aplicação web gerencia uma oficina, permitindo o cadastro de clientes, veículos, serviços e a geração de orçamentos.
 
+# Comandos para Instalação
 
-# LINKS IMPORTANTES
-- Front: https://auto-mechanic-silva.vercel.app/
-- Back: https://oficina-backend.vercel.app/
-- Repositório do back: https://github.com/DaniloNogueira-Silva/oficina_backend
+1. Defina a URL do banco no arquivo `.env` do projeto.
+2. Instale as dependências:
+```bash
+npm install
+cd src
+npx prisma migrate dev
+npm run start:dev
+```
 
+# Tecnologias Utilizadas
+
+- **NestJS:** Framework do Node.js para desenvolvimento backend.
+- **Prisma:** ORM para Node.js e TypeScript.
+
+# Links Importantes
+
+- **Frontend:** [Auto Mechanic](https://auto-mechanic-silva.vercel.app/)
+- **Backend:** [Oficina Backend](https://oficina-backend.vercel.app/)
+- **Repositório do Backend:** [GitHub](https://github.com/DaniloNogueira-Silva/oficina_backend)
+
+## Imagens do Projeto
+
+![image](images/image.png)
+![image copy](images/image%20copy.png)
+![image copy 2](images/image%20copy%202.png)
+![image copy 3](images/image%20copy%203.png)
+![image copy 4](images/image%20copy%204.png)
+![image copy 5](images/image%20copy%205.png)
+![image copy 6](images/image%20copy%206.png)
+![image copy 7](images/image%20copy%207.png)
+![image copy 8](images/image%20copy%208.png)
+![image copy 9](images/image%20copy%209.png)
+![image copy 10](images/image%20copy%2010.png)
+![image copy 11](images/image%20copy%2011.png)
+![image copy 12](images/image%20copy%2012.png)
+![image copy 13](images/image%20copy%2013.png)
+![image copy 14](images/image%20copy%2014.png)
+![image copy 15](images/image%20copy%2015.png)
+![image copy 16](images/image%20copy%2016.png)
+![image copy 17](images/image%20copy%2017.png)
+```

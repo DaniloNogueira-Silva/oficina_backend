@@ -1,3 +1,6 @@
+# SOBRE O PROJETO
+- Foi um trabalho feito em conjunto com o meu colega de sala Éder Júnior, onde ele fez o frontend e eu o backend. Desenvolvemos uma aplicação web para gerenciar uma oficina, com capacidade de cadastrar clientes, veículos, serviços e gerar orçamentos.
+
 # COMANDOS PRA INSTALAR
 ## Instalar dependencias e banco
 - Precisa colocar a url do banco no env do projeto

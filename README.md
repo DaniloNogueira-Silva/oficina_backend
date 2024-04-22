@@ -5,7 +5,8 @@
   - **Login:** eder@gmail.com 
   - **Senha:** password
 - **Backend:** [Oficina Backend](https://oficina-backend.vercel.app/)
-- **Repositório do Backend:** [GitHub](https://github.com/DaniloNogueira-Silva/oficina_backend)
+- **Repositório do Backend:** [GitHub_backend](https://github.com/DaniloNogueira-Silva/oficina_backend)
+- **Repositório do Frontend:** [Github_frontend](https://github.com/EderJrDev/auto-mechanic-silva)
 
 O projeto foi uma colaboração entre Danilo Nogueira Silva e Éder Júnior. O frontend foi desenvolvido por Éder, enquanto Danilo trabalhou no backend. A aplicação web gerencia uma oficina, permitindo o cadastro de clientes, veículos, serviços e a geração de orçamentos.
 
